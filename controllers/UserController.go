@@ -1,12 +1,10 @@
 package controllers
 
 import (
+	"easy-gin/models"
+	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
-
-	"easy-gin/models"
-
-	"github.com/gin-gonic/gin"
 )
 
 // get one
