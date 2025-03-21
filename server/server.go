@@ -3,7 +3,6 @@ package server
 import (
 	"easy-gin/configs"
 	"easy-gin/routes"
-
 	"github.com/gin-gonic/gin"
 )
 
