@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"easy-gin/models"
+	"easy-gin/app/models"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
