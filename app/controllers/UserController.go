@@ -2,9 +2,12 @@ package controllers
 
 import (
 	"easy-gin/app/models"
+	"easy-gin/configs"
 	"github.com/gin-gonic/gin"
+	"github.com/redis/go-redis/v9"
 	"net/http"
 	"strconv"
+	"time"
 )
 
 // get one
@@ -18,7 +21,6 @@ func UserGet(ctx *gin.Context) {
 		})
 		return
 	}
-
 	ctx.JSON(http.StatusOK, gin.H{
 		"data": data,
 	})
@@ -37,9 +39,26 @@ func UserGetList(ctx *gin.Context) {
 			"msg": err.Error(),
 		})
 	}
+
+	err1 := configs.GetRedis().Set("name", "Gin+Redis", 10*time.Second)
+	if err1 != nil {
+		ctx.JSON(500, gin.H{"error": err.Error()})
+		//return
+	}
+
+	value, err2 := configs.GetRedis().Get("name")
+	if err2 == redis.Nil {
+		ctx.JSON(404, gin.H{"message": "数据不存在"})
+		//return
+	} else if err1 != nil {
+		ctx.JSON(500, gin.H{"error": err.Error()})
+		//return
+	}
+
 	ctx.JSON(http.StatusOK, gin.H{
 		"msg":  "success",
 		"data": users,
+		"res":  value,
 	})
 }
 

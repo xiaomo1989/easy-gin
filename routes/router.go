@@ -16,11 +16,3 @@ func RegisterRoutes(router *gin.Engine) {
 	router.PATCH("/users/:id", controllers2.UserPut)
 	router.DELETE("/users/:id", controllers2.UserDelete)
 }
-
-func SetupRouter() *gin.Engine {
-	r := gin.Default()
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{"message": "Hello Gin!"})
-	})
-	return r
-}
